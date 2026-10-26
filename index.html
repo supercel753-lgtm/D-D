@@ -3,166 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#151326">
-  <meta name="description" content="Pixel Realms — uma aventura de RPG de fantasia inspirada em D&D 5e.">
-  <title>Pixel Realms — D&D 5e</title>
-  <link rel="stylesheet" href="./style.css">
+  <title>Emulador D&D 5e Pixel • 2014 PHB</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <header class="topbar">
-    <div>
-      <h1>⚔️ Pixel Realms</h1>
-      <p>Uma aventura de fantasia e dados</p>
-    </div>
-    <span class="badge">RPG • 5e</span>
-  </header>
-
-  <main>
-    <section id="menu" class="view active">
-      <div class="panel hero-panel">
-        <p class="eyebrow">SUA LENDA COMEÇA AQUI</p>
-        <h2>As Crônicas do Reino Esquecido</h2>
-        <p>
-          Crie seu herói, explore um mundo de fantasia,
-          enfrente criaturas e descubra os segredos do reino.
-        </p>
-        <button type="button" onclick="showView('character')">
-          Criar personagem
-        </button>
-        <button type="button" class="secondary" onclick="showView('rules')">
-          Como jogar
-        </button>
+  <div id="app">
+    <!-- TELA INICIAL -->
+    <section id="screen-title" class="screen active">
+      <div class="pixel-border title-box">
+        <h1>D&D 5e</h1>
+        <h2>EMULADOR PIXEL</h2>
+        <p class="subtitle">Livro do Jogador 2014</p>
+        <button id="btn-start" class="pixel-btn">CRIAR PERSONAGEM</button>
+        <button id="btn-load" class="pixel-btn secondary">CARREGAR</button>
       </div>
-
-      <div class="panel">
-        <h3>📜 Sua missão</h3>
-        <p>
-          Uma antiga força despertou nas ruínas ao norte.
-          Vilarejos estão desaparecendo, e rumores falam
-          de uma sombra que protege um segredo ancestral.
-        </p>
-      </div>
+      <div class="footer-pixel">Modular • 2 Gêneros • Todas Raças & Classes PHB</div>
     </section>
 
-    <section id="character" class="view">
-      <div class="panel">
-        <h2>🧙 Criação de personagem</h2>
-        <p>Personalize seu aventureiro antes de começar.</p>
-
-        <form id="characterForm">
-          <label for="nameInput">Nome do personagem</label>
-          <input
-            id="nameInput"
-            name="characterName"
-            type="text"
-            maxlength="30"
-            placeholder="Ex.: Link Sevarius"
-            required
-          >
-
-          <label for="genderInput">Gênero</label>
-          <select id="genderInput" name="gender">
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-          </select>
-
-          <label for="raceInput">Raça</label>
-          <select id="raceInput" name="race"></select>
-
-          <label for="classInput">Classe</label>
-          <select id="classInput" name="characterClass"></select>
-
-          <h3>Atributos</h3>
-          <div id="abilityGrid"></div>
-
-          <button type="button" onclick="randomizeStats()">
-            🎲 Sortear atributos
-          </button>
-
-          <button type="submit">Começar aventura</button>
-          <button type="button" class="secondary" onclick="showView('menu')">
-            Voltar
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <section id="game" class="view">
-      <div class="panel">
-        <h2 id="sceneTitle">O Reino Esquecido</h2>
-        <p id="sceneCaption">Uma nova aventura começa...</p>
-        <p id="storyText"></p>
-
-        <div id="choices" class="choices"></div>
-
-        <div id="combatBox" class="hidden">
-          <h3>⚔️ Combate</h3>
-          <p>Vida do inimigo: <span id="enemyHp">0</span></p>
-          <button type="button" onclick="attack()">Atacar</button>
-          <button type="button" onclick="castSpell()">Usar magia</button>
-          <button type="button" class="secondary" onclick="runAway()">
-            Fugir
-          </button>
+    <!-- CRIAÇÃO DE PERSONAGEM -->
+    <section id="screen-create" class="screen">
+      <div class="pixel-border create-box">
+        <h2>CRIAÇÃO DE HERÓI</h2>
+        
+        <div class="step" id="step-1">
+          <label>Nome do Personagem</label>
+          <input type="text" id="char-name" maxlength="20" placeholder="Ex: Thorin">
+          
+          <label>Gênero</label>
+          <div class="radio-group">
+            <label><input type="radio" name="gender" value="Masculino" checked> Masculino</label>
+            <label><input type="radio" name="gender" value="Feminino"> Feminino</label>
+          </div>
         </div>
-      </div>
 
-      <div class="panel character-status">
-        <h3>🛡️ Personagem</h3>
-        <p><strong>Nome:</strong> <span id="heroName">Aventureiro</span></p>
-        <p><strong>Raça / Classe:</strong> <span id="heroRaceClass">—</span></p>
-        <p><strong>Nível:</strong> <span id="level">1</span></p>
-        <p><strong>Vida:</strong> <span id="hp">10</span>/<span id="maxHp">10</span></p>
-        <p><strong>Classe de Armadura:</strong> <span id="ac">10</span></p>
+        <div class="step" id="step-2" style="display:none">
+          <label>Raça</label>
+          <select id="race-select"></select>
+          
+          <label>Sub-raça</label>
+          <select id="subrace-select"></select>
+          
+          <div id="race-desc" class="desc-box"></div>
+        </div>
 
-        <hr>
+        <div class="step" id="step-3" style="display:none">
+          <label>Classe</label>
+          <select id="class-select"></select>
+          <div id="class-desc" class="desc-box"></div>
+        </div>
 
-        <h3>🎲 Dados</h3>
-        <p id="diceResult">Role um dado para começar.</p>
-        <button type="button" onclick="rollDie(20)">Rolar d20</button>
+        <div class="step" id="step-4" style="display:none">
+          <label>Atributos (Array Padrão ou Personalizado)</label>
+          <div class="stats-grid">
+            <div class="stat">
+              <span>FOR</span>
+              <input type="number" id="str" min="3" max="18" value="15">
+            </div>
+            <div class="stat">
+              <span>DES</span>
+              <input type="number" id="dex" min="3" max="18" value="14">
+            </div>
+            <div class="stat">
+              <span>CON</span>
+              <input type="number" id="con" min="3" max="18" value="13">
+            </div>
+            <div class="stat">
+              <span>INT</span>
+              <input type="number" id="int" min="3" max="18" value="12">
+            </div>
+            <div class="stat">
+              <span>SAB</span>
+              <input type="number" id="wis" min="3" max="18" value="10">
+            </div>
+            <div class="stat">
+              <span>CAR</span>
+              <input type="number" id="cha" min="3" max="18" value="8">
+            </div>
+          </div>
+          <button id="btn-roll" class="pixel-btn small">RODAR 4d6</button>
+          <button id="btn-standard" class="pixel-btn small">ARRAY PADRÃO</button>
+        </div>
 
-        <h3>📖 Diário</h3>
-        <div id="log" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <section id="rules" class="view">
-      <div class="panel">
-        <h2>📖 Como jogar</h2>
-
-        <h3>O básico</h3>
-        <p>
-          Explore o cenário, leia as descrições e escolha suas ações.
-          Suas decisões determinam como a aventura se desenvolve.
-        </p>
-
-        <h3>Dados</h3>
-        <p>
-          O d20 é usado para representar testes e ataques.
-          O resultado pode ser influenciado pelos atributos e bônus
-          do personagem, conforme as regras implementadas no jogo.
-        </p>
-
-        <h3>Combate</h3>
-        <p>
-          Durante os confrontos, escolha entre atacar, usar magia
-          ou tentar fugir. Acompanhe sua vida para não ser derrotado.
-        </p>
-
-        <button type="button" onclick="showView('menu')">
-          Voltar ao menu
-        </button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>Pixel Realms • Projeto independente de RPG</p>
-  </footer>
-
-  <!-- Os arquivos precisam existir nestes caminhos. -->
-  <script src="./data/classes.js"></script>
-  <script src="./data/races.js"></script>
-  <script src="./game.js"></script>
-</body>
-  </html>
+        <div class="step" id="step-5" style="display:none">
+          <label>Antecedente</label>
+          <select id="bg-select">
+            <option>Acólito</option>
+            <option>Artífice</option>
+            <option>Artista</option>
+            <option>Charlatão</option>
+            <option>Criminoso</option>
+            <option>Eremita</option>
+            <option>Herói do Povo</option>
+            <option>Nobre</option>
+            <option>Sábio</option>
+            <option>Soldado</option>
+            <option>Viajante</option>
+            <option>Marinheiro</option>
+          </select>
+          
+          <label>Alinhamento</label>
+          <select id="align-select">
+            <option>Leal e Bom</option>
+            <option>Neutro e Bom</option>
+    
+... 
