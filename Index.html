@@ -3,157 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixel Realms — RPG de Mesa</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#151326">
+  <meta name="description" content="Pixel Realms — uma aventura de RPG de fantasia inspirada em D&D 5e.">
+  <title>Pixel Realms — D&D 5e</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
   <header class="topbar">
-    <h1>⚔ PIXEL REALMS</h1>
-    <nav>
-      <button onclick="showView('game')">Campanha</button>
-      <button onclick="showView('character')">Personagem</button>
-      <button onclick="showView('rules')">Regras</button>
-    </nav>
+    <div>
+      <h1>⚔️ Pixel Realms</h1>
+      <p>Uma aventura de fantasia e dados</p>
+    </div>
+    <span class="badge">RPG • 5e</span>
   </header>
 
   <main>
-    <section id="game" class="view active">
-      <div class="panel">
-        <span class="eyebrow">CAPÍTULO 1</span>
-        <h2 id="sceneTitle">A Estrada das Lanternas</h2>
-
-        <div class="pixel-scene">
-          <div class="moon"></div>
-          <div class="mountain"></div>
-          <div class="hut">
-            <div class="roof"></div>
-            <div class="hutbody"></div>
-          </div>
-          <div class="tree"></div>
-          <div class="hero"></div>
-          <div class="scene-caption" id="sceneCaption">
-            Uma luz azul pisca na estalagem abandonada.
-          </div>
-        </div>
-
-        <p id="storyText">
-          A estrada termina diante da Estalagem do Corvo.
-          Viajantes desapareceram perto da ponte. Uma luz azul
-          brilha nas janelas de um prédio abandonado.
+    <section id="menu" class="view active">
+      <div class="panel hero-panel">
+        <p class="eyebrow">SUA LENDA COMEÇA AQUI</p>
+        <h2>As Crônicas do Reino Esquecido</h2>
+        <p>
+          Crie seu herói, explore um mundo de fantasia,
+          enfrente criaturas e descubra os segredos do reino.
         </p>
-
-        <div id="choices">
-          <button onclick="choose('investigate')">Investigar a estalagem</button>
-          <button onclick="choose('bridge')">Examinar a ponte</button>
-          <button onclick="choose('camp')">Montar acampamento</button>
-        </div>
-
-        <div id="combatBox" class="hidden">
-          <h3>⚔ Sombra Errante</h3>
-          <p>PV do inimigo: <span id="enemyHp">12</span>/12</p>
-          <button onclick="attack()">Atacar</button>
-          <button onclick="castSpell()">Usar magia</button>
-          <button onclick="runAway()">Recuar</button>
-        </div>
+        <button type="button" onclick="showView('character')">
+          Criar personagem
+        </button>
+        <button type="button" class="secondary" onclick="showView('rules')">
+          Como jogar
+        </button>
       </div>
 
-      <aside class="panel">
-        <h2 id="heroName">Aventureiro</h2>
-        <p id="heroRaceClass">Humano • Guerreiro</p>
-        <p>Nível: <span id="level">1</span></p>
-        <p>PV: <span id="hp">12</span>/<span id="maxHp">12</span></p>
-        <p>CA: <span id="ac">16</span></p>
-
-        <button onclick="showView('character')">Editar personagem</button>
-
-        <hr>
-        <h3>🎲 Dados</h3>
-        <div class="dice">
-          <button onclick="rollDie(4)">d4</button>
-          <button onclick="rollDie(6)">d6</button>
-          <button onclick="rollDie(8)">d8</button>
-          <button onclick="rollDie(10)">d10</button>
-          <button onclick="rollDie(12)">d12</button>
-          <button onclick="rollDie(20)">d20</button>
-          <button onclick="rollDie(100)">d100</button>
-        </div>
-        <p id="diceResult">Role um dado!</p>
-
-        <h3>📜 Diário</h3>
-        <div id="log">Sua aventura começa agora.</div>
-      </aside>
+      <div class="panel">
+        <h3>📜 Sua missão</h3>
+        <p>
+          Uma antiga força despertou nas ruínas ao norte.
+          Vilarejos estão desaparecendo, e rumores falam
+          de uma sombra que protege um segredo ancestral.
+        </p>
+      </div>
     </section>
 
     <section id="character" class="view">
       <div class="panel">
-        <h2>Criação de personagem</h2>
+        <h2>🧙 Criação de personagem</h2>
+        <p>Personalize seu aventureiro antes de começar.</p>
 
         <form id="characterForm">
-          <label>Nome
-            <input id="nameInput" value="Aventureiro" required>
-          </label>
+          <label for="nameInput">Nome do personagem</label>
+          <input
+            id="nameInput"
+            name="characterName"
+            type="text"
+            maxlength="30"
+            placeholder="Ex.: Link Sevarius"
+            required
+          >
 
-          <label>Gênero
-            <select id="genderInput">
-              <option>Masculino</option>
-              <option>Feminino</option>
-            </select>
-          </label>
+          <label for="genderInput">Gênero</label>
+          <select id="genderInput" name="gender">
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+          </select>
 
-          <label>Raça
-            <select id="raceInput"></select>
-          </label>
+          <label for="raceInput">Raça</label>
+          <select id="raceInput" name="race"></select>
 
-          <label>Classe
-            <select id="classInput"></select>
-          </label>
-
-          <label>Antecedente
-            <select id="backgroundInput">
-              <option>Acolito</option>
-              <option>Artesão de Guilda</option>
-              <option>Artista</option>
-              <option>Charlatão</option>
-              <option>Criminoso</option>
-              <option>Ermitão</option>
-              <option>Herói do Povo</option>
-              <option>Marinheiro</option>
-              <option>Nobre</option>
-              <option>Órfão</option>
-              <option>Sábio</option>
-              <option>Soldado</option>
-            </select>
-          </label>
+          <label for="classInput">Classe</label>
+          <select id="classInput" name="characterClass"></select>
 
           <h3>Atributos</h3>
           <div id="abilityGrid"></div>
-          <button type="button" onclick="randomizeStats()">Gerar atributos</button>
-          <button type="submit">Salvar personagem</button>
+
+          <button type="button" onclick="randomizeStats()">
+            🎲 Sortear atributos
+          </button>
+
+          <button type="submit">Começar aventura</button>
+          <button type="button" class="secondary" onclick="showView('menu')">
+            Voltar
+          </button>
         </form>
+      </div>
+    </section>
+
+    <section id="game" class="view">
+      <div class="panel">
+        <h2 id="sceneTitle">O Reino Esquecido</h2>
+        <p id="sceneCaption">Uma nova aventura começa...</p>
+        <p id="storyText"></p>
+
+        <div id="choices" class="choices"></div>
+
+        <div id="combatBox" class="hidden">
+          <h3>⚔️ Combate</h3>
+          <p>Vida do inimigo: <span id="enemyHp">0</span></p>
+          <button type="button" onclick="attack()">Atacar</button>
+          <button type="button" onclick="castSpell()">Usar magia</button>
+          <button type="button" class="secondary" onclick="runAway()">
+            Fugir
+          </button>
+        </div>
+      </div>
+
+      <div class="panel character-status">
+        <h3>🛡️ Personagem</h3>
+        <p><strong>Nome:</strong> <span id="heroName">Aventureiro</span></p>
+        <p><strong>Raça / Classe:</strong> <span id="heroRaceClass">—</span></p>
+        <p><strong>Nível:</strong> <span id="level">1</span></p>
+        <p><strong>Vida:</strong> <span id="hp">10</span>/<span id="maxHp">10</span></p>
+        <p><strong>Classe de Armadura:</strong> <span id="ac">10</span></p>
+
+        <hr>
+
+        <h3>🎲 Dados</h3>
+        <p id="diceResult">Role um dado para começar.</p>
+        <button type="button" onclick="rollDie(20)">Rolar d20</button>
+
+        <h3>📖 Diário</h3>
+        <div id="log" aria-live="polite"></div>
       </div>
     </section>
 
     <section id="rules" class="view">
       <div class="panel">
-        <h2>Guia rápido</h2>
-        <h3>Testes</h3>
-        <p>Role 1d20 e some o modificador apropriado.</p>
+        <h2>📖 Como jogar</h2>
+
+        <h3>O básico</h3>
+        <p>
+          Explore o cenário, leia as descrições e escolha suas ações.
+          Suas decisões determinam como a aventura se desenvolve.
+        </p>
+
+        <h3>Dados</h3>
+        <p>
+          O d20 é usado para representar testes e ataques.
+          O resultado pode ser influenciado pelos atributos e bônus
+          do personagem, conforme as regras implementadas no jogo.
+        </p>
 
         <h3>Combate</h3>
-        <p>Em seu turno, você pode atacar ou realizar outra ação disponível.</p>
+        <p>
+          Durante os confrontos, escolha entre atacar, usar magia
+          ou tentar fugir. Acompanhe sua vida para não ser derrotado.
+        </p>
 
-        <h3>Modificadores</h3>
-        <p>Modificador = arredondar para baixo ((atributo - 10) / 2).</p>
-
-        <p>Este protótipo simplifica várias regras de D&D 5e.</p>
+        <button type="button" onclick="showView('menu')">
+          Voltar ao menu
+        </button>
       </div>
     </section>
   </main>
 
-  <footer>PIXEL REALMS • RPG pixelado</footer>
+  <footer>
+    <p>Pixel Realms • Projeto independente de RPG</p>
+  </footer>
 
-  <script src="data/classes.js"></script>
-  <script src="data/races.js"></script>
-  <script src="game.js"></script>
+  <!-- Os arquivos precisam existir nestes caminhos. -->
+  <script src="./data/classes.js"></script>
+  <script src="./data/races.js"></script>
+  <script src="./game.js"></script>
 </body>
-</html>
+  </html>
