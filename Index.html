@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Realms — RPG de Mesa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>⚔ PIXEL REALMS</h1>
+    <nav>
+      <button onclick="showView('game')">Campanha</button>
+      <button onclick="showView('character')">Personagem</button>
+      <button onclick="showView('rules')">Regras</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="game" class="view active">
+      <div class="panel">
+        <span class="eyebrow">CAPÍTULO 1</span>
+        <h2 id="sceneTitle">A Estrada das Lanternas</h2>
+
+        <div class="pixel-scene">
+          <div class="moon"></div>
+          <div class="mountain"></div>
+          <div class="hut">
+            <div class="roof"></div>
+            <div class="hutbody"></div>
+          </div>
+          <div class="tree"></div>
+          <div class="hero"></div>
+          <div class="scene-caption" id="sceneCaption">
+            Uma luz azul pisca na estalagem abandonada.
+          </div>
+        </div>
+
+        <p id="storyText">
+          A estrada termina diante da Estalagem do Corvo.
+          Viajantes desapareceram perto da ponte. Uma luz azul
+          brilha nas janelas de um prédio abandonado.
+        </p>
+
+        <div id="choices">
+          <button onclick="choose('investigate')">Investigar a estalagem</button>
+          <button onclick="choose('bridge')">Examinar a ponte</button>
+          <button onclick="choose('camp')">Montar acampamento</button>
+        </div>
+
+        <div id="combatBox" class="hidden">
+          <h3>⚔ Sombra Errante</h3>
+          <p>PV do inimigo: <span id="enemyHp">12</span>/12</p>
+          <button onclick="attack()">Atacar</button>
+          <button onclick="castSpell()">Usar magia</button>
+          <button onclick="runAway()">Recuar</button>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <h2 id="heroName">Aventureiro</h2>
+        <p id="heroRaceClass">Humano • Guerreiro</p>
+        <p>Nível: <span id="level">1</span></p>
+        <p>PV: <span id="hp">12</span>/<span id="maxHp">12</span></p>
+        <p>CA: <span id="ac">16</span></p>
+
+        <button onclick="showView('character')">Editar personagem</button>
+
+        <hr>
+        <h3>🎲 Dados</h3>
+        <div class="dice">
+          <button onclick="rollDie(4)">d4</button>
+          <button onclick="rollDie(6)">d6</button>
+          <button onclick="rollDie(8)">d8</button>
+          <button onclick="rollDie(10)">d10</button>
+          <button onclick="rollDie(12)">d12</button>
+          <button onclick="rollDie(20)">d20</button>
+          <button onclick="rollDie(100)">d100</button>
+        </div>
+        <p id="diceResult">Role um dado!</p>
+
+        <h3>📜 Diário</h3>
+        <div id="log">Sua aventura começa agora.</div>
+      </aside>
+    </section>
+
+    <section id="character" class="view">
+      <div class="panel">
+        <h2>Criação de personagem</h2>
+
+        <form id="characterForm">
+          <label>Nome
+            <input id="nameInput" value="Aventureiro" required>
+          </label>
+
+          <label>Gênero
+            <select id="genderInput">
+              <option>Masculino</option>
+              <option>Feminino</option>
+            </select>
+          </label>
+
+          <label>Raça
+            <select id="raceInput"></select>
+          </label>
+
+          <label>Classe
+            <select id="classInput"></select>
+          </label>
+
+          <label>Antecedente
+            <select id="backgroundInput">
+              <option>Acolito</option>
+              <option>Artesão de Guilda</option>
+              <option>Artista</option>
+              <option>Charlatão</option>
+              <option>Criminoso</option>
+              <option>Ermitão</option>
+              <option>Herói do Povo</option>
+              <option>Marinheiro</option>
+              <option>Nobre</option>
+              <option>Órfão</option>
+              <option>Sábio</option>
+              <option>Soldado</option>
+            </select>
+          </label>
+
+          <h3>Atributos</h3>
+          <div id="abilityGrid"></div>
+          <button type="button" onclick="randomizeStats()">Gerar atributos</button>
+          <button type="submit">Salvar personagem</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="rules" class="view">
+      <div class="panel">
+        <h2>Guia rápido</h2>
+        <h3>Testes</h3>
+        <p>Role 1d20 e some o modificador apropriado.</p>
+
+        <h3>Combate</h3>
+        <p>Em seu turno, você pode atacar ou realizar outra ação disponível.</p>
+
+        <h3>Modificadores</h3>
+        <p>Modificador = arredondar para baixo ((atributo - 10) / 2).</p>
+
+        <p>Este protótipo simplifica várias regras de D&D 5e.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>PIXEL REALMS • RPG pixelado</footer>
+
+  <script src="data/classes.js"></script>
+  <script src="data/races.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
