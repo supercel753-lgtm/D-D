@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emulador D&D 5e Pixel • 2014 PHB</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- TELA INICIAL -->
+    <section id="screen-title" class="screen active">
+      <div class="pixel-border title-box">
+        <h1>D&D 5e</h1>
+        <h2>EMULADOR PIXEL</h2>
+        <p class="subtitle">Livro do Jogador 2014</p>
+        <button id="btn-start" class="pixel-btn">CRIAR PERSONAGEM</button>
+        <button id="btn-load" class="pixel-btn secondary">CARREGAR</button>
+      </div>
+      <div class="footer-pixel">Modular • 2 Gêneros • Todas Raças & Classes PHB</div>
+    </section>
+
+    <!-- CRIAÇÃO DE PERSONAGEM -->
+    <section id="screen-create" class="screen">
+      <div class="pixel-border create-box">
+        <h2>CRIAÇÃO DE HERÓI</h2>
+        
+        <div class="step" id="step-1">
+          <label>Nome do Personagem</label>
+          <input type="text" id="char-name" maxlength="20" placeholder="Ex: Thorin">
+          
+          <label>Gênero</label>
+          <div class="radio-group">
+            <label><input type="radio" name="gender" value="Masculino" checked> Masculino</label>
+            <label><input type="radio" name="gender" value="Feminino"> Feminino</label>
+          </div>
+        </div>
+
+        <div class="step" id="step-2" style="display:none">
+          <label>Raça</label>
+          <select id="race-select"></select>
+          
+          <label>Sub-raça</label>
+          <select id="subrace-select"></select>
+          
+          <div id="race-desc" class="desc-box"></div>
+        </div>
+
+        <div class="step" id="step-3" style="display:none">
+          <label>Classe</label>
+          <select id="class-select"></select>
+          <div id="class-desc" class="desc-box"></div>
+        </div>
+
+        <div class="step" id="step-4" style="display:none">
+          <label>Atributos (Array Padrão ou Personalizado)</label>
+          <div class="stats-grid">
+            <div class="stat">
+              <span>FOR</span>
+              <input type="number" id="str" min="3" max="18" value="15">
+            </div>
+            <div class="stat">
+              <span>DES</span>
+              <input type="number" id="dex" min="3" max="18" value="14">
+            </div>
+            <div class="stat">
+              <span>CON</span>
+              <input type="number" id="con" min="3" max="18" value="13">
+            </div>
+            <div class="stat">
+              <span>INT</span>
+              <input type="number" id="int" min="3" max="18" value="12">
+            </div>
+            <div class="stat">
+              <span>SAB</span>
+              <input type="number" id="wis" min="3" max="18" value="10">
+            </div>
+            <div class="stat">
+              <span>CAR</span>
+              <input type="number" id="cha" min="3" max="18" value="8">
+            </div>
+          </div>
+          <button id="btn-roll" class="pixel-btn small">RODAR 4d6</button>
+          <button id="btn-standard" class="pixel-btn small">ARRAY PADRÃO</button>
+        </div>
+
+        <div class="step" id="step-5" style="display:none">
+          <label>Antecedente</label>
+          <select id="bg-select">
+            <option>Acólito</option>
+            <option>Artífice</option>
+            <option>Artista</option>
+            <option>Charlatão</option>
+            <option>Criminoso</option>
+            <option>Eremita</option>
+            <option>Herói do Povo</option>
+            <option>Nobre</option>
+            <option>Sábio</option>
+            <option>Soldado</option>
+            <option>Viajante</option>
+            <option>Marinheiro</option>
+          </select>
+          
+          <label>Alinhamento</label>
+          <select id="align-select">
+            <option>Leal e Bom</option>
+            <option>Neutro e Bom</option>
+    
+... 

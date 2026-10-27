@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#121326"><meta name="description" content="Pixel Realms: fichas, campanhas e encontros de RPG.">
+  <title>Pixel Realms | RPG digital</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="brand"><div class="brand-mark">✦</div><div><strong>PIXEL<br>REALMS</strong><small>SEU MUNDO, SUAS REGRAS</small></div></div>
+      <nav id="navigation">
+        <button type="button" data-view="dashboard" class="active">⌂ <span>Visão geral</span></button>
+        <p class="nav-group">JOGADOR</p>
+        <button type="button" data-view="characters">♙ <span>Personagens</span></button>
+        <button type="button" data-view="library">▤ <span>Guias, magias e itens</span></button>
+        <p class="nav-group">MESTRE</p>
+        <button type="button" data-view="campaigns">⚑ <span>Campanhas</span></button>
+        <button type="button" data-view="bestiary">♜ <span>Bestiário</span></button>
+        <button type="button" data-view="encounters">⚔ <span>Encontros</span></button>
+        <p class="nav-group">FERRAMENTAS</p>
+        <button type="button" data-view="dice">◈ <span>Dados</span></button>
+        <button type="button" data-view="ai">✧ <span>Assistente IA</span></button>
+        <button type="button" data-view="settings">⚙ <span>Backup e ajustes</span></button>
+      </nav>
+      <div class="sidebar-footer"><span class="dot"></span> <span>Dados armazenados neste navegador</span></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar"><div class="crumb">✧ <span id="screen-label">VISÃO GERAL</span></div><div class="topbar-right"><span class="pill">EDIÇÃO 2014 · REFERÊNCIAS</span><span class="user-badge">PR</span></div></header>
+      <main id="content" tabindex="-1"></main>
+      <footer class="page-footer">PIXEL REALMS · Ferramenta independente · Referências concisas aos livros fornecidos · Sem afiliação com Wizards of the Coast</footer>
+    </div>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><form method="dialog"><h3 id="confirm-title">Confirmar operação</h3><p id="confirm-text"></p><div class="actions"><button class="btn ghost" value="cancel">Cancelar</button><button class="btn danger" value="confirm">Confirmar</button></div></form></dialog>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
